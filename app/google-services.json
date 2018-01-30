@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "443218629768",
+    "firebase_url": "https://good-applications.firebaseio.com",
+    "project_id": "good-applications",
+    "storage_bucket": "good-applications.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:443218629768:android:d1925368d5c9c393",
+        "android_client_info": {
+          "package_name": "com.android.goodapplications.goodapplications"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "443218629768-ovpkqqv9ooro9a8mngefs6e8cm50igmd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.android.goodapplications.goodapplications",
+            "certificate_hash": "e8be42109f37d969c112ef689d7ba847989cc968"
+          }
+        },
+        {
+          "client_id": "443218629768-ghfurjega131h6fjrr9q2cbvr2qnc8dl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfCEZjl-eXsGfTvFrqil4HdzAUzTDKeRQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "443218629768-91k8surkh99602dkfgb8kgoafivbb11n.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.shannoga.goodApplications.word"
+              }
+            },
+            {
+              "client_id": "443218629768-ghfurjega131h6fjrr9q2cbvr2qnc8dl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
