@@ -2,13 +2,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-    <data>
-        <import type="android.view.View"/>
-
-        <variable
-            name="viewModel"
-            type="com.android.goodapplications.goodapplications.ViewModel.ArtworksViewModel" />
-    </data>
     <android.support.v4.widget.DrawerLayout
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
@@ -20,26 +13,6 @@
             layout="@layout/app_bar_main"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-        <ProgressBar
-            android:id="@+id/loading"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:indeterminate="true"
-            android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/artworks_rv"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:indeterminate="true"
-            android:paddingTop="60dp"
-            android:visibility="@{viewModel.isLoading ? View.GONE : View.VISIBLE}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:listitem="@layout/rv_item_artwork" />
         <android.support.design.widget.NavigationView
             android:id="@+id/nav_view"
             android:layout_width="wrap_content"

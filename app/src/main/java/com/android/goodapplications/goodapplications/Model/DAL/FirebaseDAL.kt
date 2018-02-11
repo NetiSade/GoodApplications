@@ -28,13 +28,13 @@ class FirebaseDAL : AbstractDAL()
 
     fun listenToArtists(collectionRef:String, handler: (ArrayList<Artist>) -> Unit)
     {
-        listener= dbRef.collection(collectionRef)
+        listener= dbRef.collection(collectionRef).orderBy("name")
                 .addSnapshotListener(EventListener<QuerySnapshot> { querySnapshot, e ->
                     if (e != null) {
                         Log.w(ContentValues.TAG, "Listen error", e)
                         return@EventListener
                     }
-                    var artistsArray: ArrayList<Artist> = ArrayList()
+                    val artistsArray: ArrayList<Artist> = ArrayList()
                     for (document in querySnapshot.documents)
                     {
                         val source = if (querySnapshot.metadata.isFromCache)
@@ -57,13 +57,13 @@ class FirebaseDAL : AbstractDAL()
 
     fun listenToArtworks(collectionRef:String, handler: (ArrayList<Artwork>) -> Unit)
     {
-        listener= dbRef.collection(collectionRef)
+        listener= dbRef.collection(collectionRef).orderBy("publisheDate")
                 .addSnapshotListener(EventListener<QuerySnapshot> { querySnapshot, e ->
                     if (e != null) {
                         Log.w(ContentValues.TAG, "Listen error", e)
                         return@EventListener
                     }
-                    var artworksArray: ArrayList<Artwork> = ArrayList()
+                    val artworksArray: ArrayList<Artwork> = ArrayList()
                     for (document in querySnapshot.documents)
                     {
                         val source = if (querySnapshot.metadata.isFromCache)
@@ -90,7 +90,7 @@ class FirebaseDAL : AbstractDAL()
                         Log.w(ContentValues.TAG, "Listen error", e)
                         return@EventListener
                     }
-                    var artworksArray: ArrayList<Artwork> = ArrayList()
+                    val artworksArray: ArrayList<Artwork> = ArrayList()
                     for (document in querySnapshot.documents)
                     {
                         var artwork: Artwork

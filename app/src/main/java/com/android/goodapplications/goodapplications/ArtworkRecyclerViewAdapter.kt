@@ -39,7 +39,6 @@ class ArtworkRecyclerViewAdapter(internal var items: ArrayList<Artwork>,
             if (listener != null) {
                 binding.root.setOnClickListener({ _ -> listener.onItemClick(layoutPosition) })
             }
-
             binding.executePendingBindings()
         }
     }
@@ -47,6 +46,12 @@ class ArtworkRecyclerViewAdapter(internal var items: ArrayList<Artwork>,
     fun replaceData(newArtworks: ArrayList<Artwork>) {
         items = newArtworks
         notifyDataSetChanged()
+    }
+
+    fun searchData(artworks: ArrayList<Artwork>, atrToSearch: String) {
+        val newItems = ArrayList<Artwork>()
+        artworks.filterTo(newItems) { it.bodyText.contains(atrToSearch) }
+        replaceData(newItems)
     }
 
 }

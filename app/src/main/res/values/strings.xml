@@ -7,4 +7,5 @@
     <string name="has_issues">text</string>
     <string name="search_title">Search</string>
     <string name="search_hint">Text or Name</string>
+    <string name="artworks_main_drawer">Artworks</string>
 </resources>

@@ -16,13 +16,6 @@ class ArtworksModel {
             onArtworksReadyCallback.onArtworksReady(artworks)
         }
     }
-
-    fun searchInArtworks(onArtworksReadyCallback: OnArtworksReadyCallback, strToSearch: String){
-        firebase.searchArtworks("artworks",strToSearch)
-        { artworks ->
-            onArtworksReadyCallback.onArtworksReady(artworks)
-        }
-    }
 }
 
 
