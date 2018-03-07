@@ -1,9 +1,5 @@
-package com.android.goodapplications.goodapplications.Model
+package com.android.goodapplications.shira.Model
 
-import android.databinding.BaseObservable
-import android.databinding.Bindable
-import android.util.Log
-import com.android.goodapplications.goodapplications.BR
 import java.util.Date
 /**
  * Created by nsade on 12-Nov-17.

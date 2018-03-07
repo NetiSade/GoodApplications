@@ -1,4 +1,4 @@
-package com.android.goodapplications.goodapplications
+package com.android.goodapplications.shira
 
 import org.junit.Test
 

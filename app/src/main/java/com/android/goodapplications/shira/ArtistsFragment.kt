@@ -1,4 +1,4 @@
-package com.android.goodapplications.goodapplications
+package com.android.goodapplications.shira
 
 
 import android.arch.lifecycle.Observer
@@ -10,9 +10,9 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.android.goodapplications.goodapplications.Model.Artist
-import com.android.goodapplications.goodapplications.ViewModel.ArtistsViewModel
-import com.android.goodapplications.goodapplications.databinding.FragmentArtistsBinding
+import com.android.goodapplications.shira.Model.Artist
+import com.android.goodapplications.shira.ViewModel.ArtistsViewModel
+import com.android.goodapplications.shira.databinding.FragmentArtistsBinding
 
 
 class ArtistsFragment : Fragment(), ArtistRecyclerViewAdapter.OnItemClickListener {
@@ -26,13 +26,12 @@ class ArtistsFragment : Fragment(), ArtistRecyclerViewAdapter.OnItemClickListene
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater?,
-                              container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_artists,container,false)
         // Inflate the layout for this fragment
         val view = binding.root
         val activity = activity
-        val viewModel = ViewModelProviders.of(activity).get(ArtistsViewModel::class.java)
+        val viewModel = ViewModelProviders.of(activity!!).get(ArtistsViewModel::class.java)
         binding.viewModel  = viewModel
         binding.executePendingBindings()
         binding.artistsRv.layoutManager = LinearLayoutManager(activity)

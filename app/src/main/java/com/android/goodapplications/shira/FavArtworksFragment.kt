@@ -1,6 +1,5 @@
-package com.android.goodapplications.goodapplications
+package com.android.goodapplications.shira
 
-import android.app.Activity
 import android.support.v4.app.Fragment
 
 import android.databinding.DataBindingUtil
@@ -9,41 +8,40 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.android.goodapplications.goodapplications.Model.Artwork
-import com.android.goodapplications.goodapplications.ViewModel.ArtworksViewModel
-import com.android.goodapplications.goodapplications.databinding.FragmentArtworksBinding
+import com.android.goodapplications.shira.Model.Artwork
+import com.android.goodapplications.shira.ViewModel.ArtworksViewModel
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import com.android.goodapplications.shira.databinding.FragmentFavArtworksBinding
 
 
 /**
  * Created by nsade on 30-Jan-18.
  */
-class ArtworksFragment : Fragment(),ArtworkRecyclerViewAdapter.OnItemClickListener
+class FavArtworksFragment : Fragment(),ArtworkRecyclerViewAdapter.OnItemClickListener
 {
-    private lateinit var binding: FragmentArtworksBinding
-    private val artworksRecyclerViewAdapter = ArtworkRecyclerViewAdapter(arrayListOf(),this)
-    private lateinit var myActivity : Activity
+
+    private lateinit var binding: FragmentFavArtworksBinding
+    private lateinit var artworksRecyclerViewAdapter : ArtworkRecyclerViewAdapter
 
     companion object {
 
-        fun newInstance(): ArtworksFragment {
-            return ArtworksFragment()
+        fun newInstance(): FavArtworksFragment {
+            return FavArtworksFragment()
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater?,
-                              container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_artworks,container,false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_fav_artworks,container,false)
         // Inflate the layout for this fragment
         val view = binding.root
-        myActivity = activity
-        val viewModel = ViewModelProviders.of(activity).get(ArtworksViewModel::class.java)
+        val viewModel = ViewModelProviders.of(activity!!).get(ArtworksViewModel::class.java)
+        artworksRecyclerViewAdapter = ArtworkRecyclerViewAdapter(arrayListOf(),this,viewModel)
         binding.viewModel  = viewModel
         binding.executePendingBindings()
         binding.artworksRv.layoutManager = LinearLayoutManager(activity)
         binding.artworksRv.adapter = artworksRecyclerViewAdapter
-        viewModel.artworksSearchRes.observe(this,
+        viewModel.favArtworkList.observe(this,
                 Observer<ArrayList<Artwork>> { it?.let{
                     artworksRecyclerViewAdapter.replaceData(it)}
                 })
@@ -54,13 +52,12 @@ class ArtworksFragment : Fragment(),ArtworkRecyclerViewAdapter.OnItemClickListen
     {
         binding.viewModel!!.selectedArtwork = artworksRecyclerViewAdapter.items[position]
         val fragmentManager = fragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
+        val fragmentTransaction = fragmentManager!!.beginTransaction()
         val fragment = SingleArtworkFragment()
         fragmentTransaction.addToBackStack("ArtworksFragment")
-        fragmentTransaction.hide(this@ArtworksFragment)
+        fragmentTransaction.hide(this@FavArtworksFragment)
         fragmentTransaction.replace(R.id.root_layout, fragment,"SingleArtworkFragment")
         fragmentTransaction.commit()
-
     }
 
 }

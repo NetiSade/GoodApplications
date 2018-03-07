@@ -1,11 +1,11 @@
-package com.android.goodapplications.goodapplications
+package com.android.goodapplications.shira
 
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.android.goodapplications.goodapplications.Model.Artist
-import com.android.goodapplications.goodapplications.databinding.RvItemArtistBinding
+import com.android.goodapplications.shira.Model.Artist
+import com.android.goodapplications.shira.databinding.RvItemArtistBinding
 
 
 /**

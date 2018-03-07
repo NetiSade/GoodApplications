@@ -1,7 +1,4 @@
-package com.android.goodapplications.goodapplications
-
-
-
+package com.android.goodapplications.shira
 
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -14,15 +11,14 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import com.android.goodapplications.goodapplications.ViewModel.ArtistsViewModel
-import com.android.goodapplications.goodapplications.ViewModel.ArtworksViewModel
+import com.android.goodapplications.shira.ViewModel.ArtistsViewModel
+import com.android.goodapplications.shira.ViewModel.ArtworksViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
 import android.widget.SearchView
-
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -71,7 +67,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
     private fun loadData()
     {
-        artworkViewModel.loadArtworks()
+        artworkViewModel.loadData()
         artistViewModel.loadArtists()
     }
 
@@ -94,7 +90,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     /*
     Now to add a Fragment, we can call like this from any Activity:
         supportFragmentManager.inTransaction {
-                add(R.id.frameLayoutContent, fragment)
+                add(R.artworkRef.frameLayoutContent, fragment)
         }
      */
 
@@ -107,8 +103,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
     /*
     Using the above extension functions, now we can add or replace aFragment from any Activity in a single line, without any additional qualifiers:
-    addFragment(fragment, R.id.fragment_container)
-    replaceFragment(fragment, R.id.fragment_container)
+    addFragment(fragment, R.artworkRef.fragment_container)
+    replaceFragment(fragment, R.artworkRef.fragment_container)
      */
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -165,21 +161,26 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 artworkViewModel.resetSearchRes()
                 replaceFragment(ArtworksFragment.newInstance(),R.id.root_layout,"ArtworksFragment")
             }
-            R.id.nav_search ->
+            R.id.nav_fav_artworks ->
             {
-
+                replaceFragment(FavArtworksFragment.newInstance(),R.id.root_layout,"ArtworksFragment")
             }
-            R.id.nav_manage -> {
+            R.id.nav_google_auth ->
+            {
+                val intent = Intent(this, AuthActivity::class.java)
+                startActivity(intent)
+            }
 
+            R.id.nav_facebook_auth ->
+            {
+                val intent = Intent(this, FacebookLoginActivity::class.java)
+                startActivity(intent)
             }
             R.id.nav_share -> {
-
             }
             R.id.nav_send -> {
-
             }
         }
-
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }

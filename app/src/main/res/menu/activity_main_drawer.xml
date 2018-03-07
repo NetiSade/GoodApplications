@@ -12,15 +12,16 @@
         <item
             android:id="@+id/nav_artists"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Artists" />
+            android:title="@string/artists" />
         <item
-            android:id="@+id/nav_search"
-            android:title="@string/search_title"
-            android:icon="@drawable/ic_menu_gallery" />
+            android:id="@+id/nav_fav_artworks"
+            android:title="@string/fav_artworks" />
         <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:id="@+id/nav_google_auth"
+            android:title="@string/google_auth" />
+        <item
+            android:id="@+id/nav_facebook_auth"
+            android:title="@string/facebook_auth" />
     </group>
 
     <item android:title="Communicate">

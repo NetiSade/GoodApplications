@@ -1,10 +1,10 @@
-package com.android.goodapplications.goodapplications.ViewModel
+package com.android.goodapplications.shira.ViewModel
 
 import android.arch.lifecycle.MutableLiveData
 import android.databinding.ObservableField
 import android.arch.lifecycle.ViewModel
 import android.util.Log
-import com.android.goodapplications.goodapplications.Model.*
+import com.android.goodapplications.shira.Model.*
 
 /**
  * Created by nsade on 10-Dec-17.

@@ -18,8 +18,8 @@
         tools:openDrawer="start">
         <ProgressBar
             android:id="@+id/loading"
-            android:layout_width="18dp"
-            android:layout_height="18dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:indeterminate="true"
             android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}"
             app:layout_constraintEnd_toEndOf="parent"

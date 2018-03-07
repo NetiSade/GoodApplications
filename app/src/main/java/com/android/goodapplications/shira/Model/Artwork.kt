@@ -1,9 +1,7 @@
-package com.android.goodapplications.goodapplications.Model
+package com.android.goodapplications.shira.Model
 
-import android.text.SpannableString
 import android.text.SpannableStringBuilder
 import android.util.Log
-import com.google.firebase.firestore.DocumentReference
 import java.util.Date
 
 /**
@@ -32,10 +30,12 @@ data class Artwork(val acum: Boolean = false,
               val updatedAt: Date = Date(),
               val verifiedByEditor: Boolean = false,
               val year: String = "",
-                   var SpannableStringTitle : SpannableStringBuilder = SpannableStringBuilder (""),
-                   var SpannableStringArtistName : SpannableStringBuilder = SpannableStringBuilder (""),
+              var SpannableStringTitle : SpannableStringBuilder = SpannableStringBuilder (""),
+              var SpannableStringArtistName : SpannableStringBuilder = SpannableStringBuilder (""),
               var searchRes: SpannableStringBuilder = SpannableStringBuilder (""),
-              var showSearchRes: Boolean = false
+              var showSearchRes: Boolean = false,
+              var favorite : Boolean = false,
+              var artworkId: String = ""
               //val artistRef: DocumentReference
 
 ) {

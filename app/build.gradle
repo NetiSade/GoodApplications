@@ -47,6 +47,10 @@ dependencies {
     kapt "com.android.databinding:compiler:3.0.1"
     kapt "android.arch.lifecycle:compiler:1.0.0-alpha9"
     implementation 'com.google.firebase:firebase-firestore:11.8.0'
+    implementation 'com.google.firebase:firebase-auth:11.8.0'
+    implementation 'com.facebook.android:facebook-login:4.31.0'
+    implementation 'com.google.android.gms:play-services-auth:11.8.0'
+    implementation 'com.github.ivbaranov:materialfavoritebutton:0.1.4'
 }
 
 

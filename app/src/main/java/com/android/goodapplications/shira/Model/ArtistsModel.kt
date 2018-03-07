@@ -1,22 +1,16 @@
-package com.android.goodapplications.goodapplications.Model
-
-
-import com.android.goodapplications.goodapplications.Model.DAL.FirebaseDAL
+package com.android.goodapplications.shira.Model
 
 /**
  * Created by nsade on 10-Dec-17.
  */
-class ArtistsModel {
-
-    var firebase: FirebaseDAL = FirebaseDAL()
+class ArtistsModel :  GoodApplicationModel() {
 
     fun getArtists(onArtistsReadyCallback: OnArtistsReadyCallback) {
-        firebase.listenToArtists("artists")
+        firebaseDAL.listenToArtists()
         {artists ->
             onArtistsReadyCallback.onArtistsReady(artists)
         }
     }
-
 }
 
 interface OnArtistsReadyCallback{

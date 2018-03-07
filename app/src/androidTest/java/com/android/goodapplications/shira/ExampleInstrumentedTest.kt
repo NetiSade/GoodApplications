@@ -1,4 +1,4 @@
-package com.android.goodapplications.goodapplications
+package com.android.goodapplications.shira
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4

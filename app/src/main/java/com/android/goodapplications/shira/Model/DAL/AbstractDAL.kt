@@ -1,4 +1,4 @@
-package com.android.goodapplications.goodapplications.Model.DAL
+package com.android.goodapplications.shira.Model.DAL
 
 /**
  * Created by nsade on 14-Dec-17.

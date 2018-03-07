@@ -1,14 +1,16 @@
-package com.android.goodapplications.goodapplications.ViewModel
+package com.android.goodapplications.shira.ViewModel
 
 import android.arch.lifecycle.MutableLiveData
 import android.databinding.ObservableField
 import android.arch.lifecycle.ViewModel
+import android.databinding.ObservableArrayList
+import android.databinding.ObservableList
 import android.util.Log
-import com.android.goodapplications.goodapplications.Model.*
+import com.android.goodapplications.shira.Model.*
 import android.text.Spannable
 import android.text.SpannableStringBuilder
+import com.google.firebase.auth.FirebaseUser
 import kotlin.math.max
-
 
 /**
  * Created by nsade on 10-Dec-17.
@@ -29,7 +31,32 @@ class ArtworksViewModel : ViewModel() {
 
     var selectedArtwork : Artwork? = null
 
+    var favArtworksIdList = MutableLiveData<ObservableArrayList<String>>()
+
+    var favArtworkList = MutableLiveData<ArrayList<Artwork>>()
+
     val WORDS_TO_DISPLAY: Int = 4
+
+    fun loadData()
+    {
+        favArtworksIdList.value = ObservableArrayList()
+        artworks.value = ArrayList()
+        favArtworkList.value = ArrayList()
+        loadArtworks()
+    }
+
+    private fun addOnChangeListener() {//TODO: Check it! its didn't work
+        favArtworksIdList.value!!.addOnListChangedCallback(object : ObservableList.OnListChangedCallback<ObservableList<String>>(){
+            override fun onItemRangeRemoved(p0: ObservableList<String>?, p1: Int, p2: Int) {}
+            override fun onItemRangeMoved(p0: ObservableList<String>?, p1: Int, p2: Int, p3: Int) {}
+            override fun onItemRangeInserted(p0: ObservableList<String>?, p1: Int, p2: Int) {}
+            override fun onItemRangeChanged(p0: ObservableList<String>?, p1: Int, p2: Int) {}
+            override fun onChanged(p0: ObservableList<String>?) {
+                markAndSaveFavArtworks()
+            }
+
+        })
+    }
 
     fun loadArtworks() {
         isLoading.set(true)
@@ -37,9 +64,31 @@ class ArtworksViewModel : ViewModel() {
             override fun onArtworksReady(data: ArrayList<Artwork>) {
                 artworks.value = data
                 resetSearchRes()
+                loadFavArtworksId()
+            }
+        })
+    }
+
+    fun loadFavArtworksId(){
+        model.loadFavArtworks(object : OnFavListReadyCallback{
+            override fun onFavIdListReady(data: ObservableArrayList<String>) {
+                favArtworksIdList.value = data
+                markAndSaveFavArtworks()
                 isLoading.set(false)
             }
         })
+    }
+
+    private fun markAndSaveFavArtworks() {
+        favArtworkList.value = ArrayList()
+        if (favArtworksIdList.value!=null)
+            for(artworkId in favArtworksIdList.value!!) {
+                val artwork = findByArtworksId(artworkId)
+                if(artwork!=null) {
+                    artwork.favorite = true
+                    favArtworkList.value!!.add(artwork)
+                }
+            }
     }
 
     fun searchArtworks(query : String){
@@ -128,7 +177,6 @@ class ArtworksViewModel : ViewModel() {
             artwork.SpannableStringArtistName = SpannableStringBuilder(artwork.artistName)
             artwork.SpannableStringTitle = SpannableStringBuilder(artwork.title)
         }
-
     }
 
     private fun markQueryInBody(tempArtwork:Artwork,bodyWithoutEndOfLines: String, query:String)
@@ -159,4 +207,61 @@ class ArtworksViewModel : ViewModel() {
         return newStr
     }
 
+    fun addToFavorites ( ref : String)
+    {
+        if(model.getCurrentUser()!=null) {
+            if (ref !in favArtworksIdList.value!!) {
+                favArtworksIdList.value!!.add(ref)
+                model.addToArtworksFavList(ref)
+            }
+            val artwork = findByArtworksId(ref)
+            if (artwork!=null && favArtworkList.value!=null){
+                artwork.favorite = true
+                favArtworkList.value!!.add(artwork)
+            }
+        }
+    }
+
+    fun removeFromFavorites ( ref : String)
+    {
+        if(model.getCurrentUser()!=null) {
+            favArtworksIdList.value!!.remove(ref)
+            val artwork = findByArtworksId(ref)
+            artwork!!.favorite = false
+            removeFromFavList(ref)
+            model.removeFromArtworksFavList(ref)
+        }
+    }
+
+    private fun removeFromFavList(ref: String) {
+        if(null != favArtworkList.value)
+        {
+            for(artwork in favArtworkList.value!!)
+            {
+                if (artwork.artworkId == ref) {
+                    favArtworkList.value!!.remove(artwork)
+                    break
+                }
+            }
+        }
+    }
+
+    fun isFavorite ( ref : String) : Boolean
+    {
+        if(favArtworksIdList.value == null)
+            return false
+        return (ref in favArtworksIdList.value!!)
+    }
+
+    private fun findByArtworksId (artworksId: String) : Artwork?
+    {
+        for (artwork in artworks.value!!)
+            if (artwork.artworkId == artworksId)
+                return artwork
+        return null
+    }
+
+    fun getCurrentUser(): FirebaseUser? {
+        return model.getCurrentUser()
+    }
 }
