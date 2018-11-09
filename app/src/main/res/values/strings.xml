@@ -66,8 +66,12 @@
     <string name="firebaseui_title_text">FirebaseUI Auth</string>
     <string name="id_fmt">User ID: %s</string>
     <string name="email_fmt">Email: %s</string>
-    <string name="google_auth">Login with Google</string>
     <string name="facebook_auth">Login with facebook</string>
-    <string name="facebook_app_id">637167709749243</string>
     <string name="fav_artworks">FavoritesArtworks</string>
+    <string name="facebook_app_id">637167709749243</string>
+    <string name="fb_login_protocol_scheme">fb637167709749243</string>
+    <string name="fav_btn_msg_logedout">Please login to add artwork to favorites</string>
+    <string name="fav_btn_msg_removed_from_fav">Removed from favorites</string>
+    <string name="fav_btn_msg_added_to_fav">Added to favorites!</string>
+    <string name="daily_artwork_notifications_ID">Daily artwork</string>
 </resources>

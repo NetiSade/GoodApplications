@@ -17,11 +17,8 @@
             android:id="@+id/nav_fav_artworks"
             android:title="@string/fav_artworks" />
         <item
-            android:id="@+id/nav_google_auth"
-            android:title="@string/google_auth" />
-        <item
-            android:id="@+id/nav_facebook_auth"
-            android:title="@string/facebook_auth" />
+            android:id="@+id/nav_auth"
+            android:title="@string/auth" />
     </group>
 
     <item android:title="Communicate">

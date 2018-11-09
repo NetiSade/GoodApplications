@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "443218629768-aa3hm7ssi68edsamgvjmneb7nfjrcuni.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.android.goodapplications.goodapplications",
+            "certificate_hash": "a9c23ada45391236ff1c7cf8a0e728316c4cfc13"
+          }
+        },
+        {
           "client_id": "443218629768-ghfurjega131h6fjrr9q2cbvr2qnc8dl.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -40,15 +48,15 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
+              "client_id": "443218629768-ghfurjega131h6fjrr9q2cbvr2qnc8dl.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
               "client_id": "443218629768-91k8surkh99602dkfgb8kgoafivbb11n.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "com.shannoga.goodApplications.word"
               }
-            },
-            {
-              "client_id": "443218629768-ghfurjega131h6fjrr9q2cbvr2qnc8dl.apps.googleusercontent.com",
-              "client_type": 3
             }
           ]
         },

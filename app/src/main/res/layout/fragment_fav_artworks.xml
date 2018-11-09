@@ -7,13 +7,13 @@
 
         <variable
             name="viewModel"
-            type="com.android.goodapplications.shira.ViewModel.ArtworksViewModel" />
+            type="com.android.goodapplications.shira.viewModel.ArtworksViewModel" />
     </data>
     <android.support.v4.widget.DrawerLayout
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.android.goodapplications.shira.ArtworksFragment"
+        tools:context="com.android.goodapplications.shira.view.fragments.ArtworksFragment"
         android:fitsSystemWindows="true"
         tools:openDrawer="start">
         <ProgressBar
