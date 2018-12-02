@@ -19,8 +19,8 @@ class SingleArtworkFragment : Fragment(){
 
     companion object {
 
-        fun newInstance(): ArtworksFragment {
-            return ArtworksFragment()
+        fun newInstance(): SingleArtworkFragment {
+            return SingleArtworkFragment()
         }
     }
 
@@ -29,7 +29,7 @@ class SingleArtworkFragment : Fragment(){
         val view = binding.root
         val activity = activity
         val artwork = ViewModelProviders.of(activity!!).get(ArtworksViewModel::class.java).selectedArtwork
-        //binding.artwork = artwork
+        binding.artwork = artwork
         binding.executePendingBindings()
         return view
     }

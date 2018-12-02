@@ -18,13 +18,10 @@
         tools:openDrawer="start">
         <ProgressBar
             android:id="@+id/loading"
-            android:layout_width="18dp"
-            android:layout_height="18dp"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
             android:indeterminate="true"
-            android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}" />
         <android.support.v7.widget.RecyclerView
             android:id="@+id/artworks_rv"
             android:scrollbars="vertical"

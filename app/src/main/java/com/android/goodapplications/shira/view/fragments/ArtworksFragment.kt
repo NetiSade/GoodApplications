@@ -52,7 +52,7 @@ class ArtworksFragment : Fragment(), ArtworkRecyclerViewAdapter.OnItemClickListe
 
     override fun onItemClick(position: Int)
     {
-       // binding.viewModel.selectedArtwork = artworksRecyclerViewAdapter.items[position]
+        binding.viewModel!!.selectedArtwork = artworksRecyclerViewAdapter.items[position]
         val fragmentManager = fragmentManager
         val fragmentTransaction = fragmentManager!!.beginTransaction()
         val fragment = SingleArtworkFragment()

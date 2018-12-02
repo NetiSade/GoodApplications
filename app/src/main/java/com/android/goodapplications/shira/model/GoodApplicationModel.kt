@@ -7,7 +7,7 @@ import com.google.firebase.auth.FirebaseUser
 /**
  * Created by nsade on 25-Feb-18.
  */
-open class GoodApplicationModel()
+open class GoodApplicationModel
 {
     var firebaseDAL: FirebaseDAL = FirebaseDAL()
 

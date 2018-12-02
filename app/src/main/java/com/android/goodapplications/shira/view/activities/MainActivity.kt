@@ -18,43 +18,79 @@ import kotlinx.android.synthetic.main.app_bar_main.*
 import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.widget.SearchView
 import com.android.goodapplications.shira.R
-import com.android.goodapplications.shira.view.fragments.ArtistsFragment
-import com.android.goodapplications.shira.view.fragments.ArtworksFragment
-import com.android.goodapplications.shira.view.fragments.FavArtworksFragment
+import com.android.goodapplications.shira.model.Artwork
+import com.android.goodapplications.shira.view.fragments.*
+import com.android.goodapplications.shira.viewModel.AlarmViewModel
 import com.android.goodapplications.shira.viewModel.NotificationsViewModel
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import java.lang.Exception
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var artworkViewModel : ArtworksViewModel
     private lateinit var artistViewModel : ArtistsViewModel
-    private lateinit var notificationsViewModel: NotificationsViewModel
+    private lateinit var notificationsViewModel : NotificationsViewModel
+    private var fromNotification: Boolean = false
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
+        fromNotification = false
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-        artworkViewModel = ViewModelProviders.of(this).get(ArtworksViewModel::class.java)
-        artistViewModel = ViewModelProviders.of(this).get(ArtistsViewModel::class.java)
-        notificationsViewModel = ViewModelProviders.of(this).get(NotificationsViewModel::class.java)
+        initViewModels()
         val toggle = ActionBarDrawerToggle(
-                this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+                this, drawer_layout, toolbar, R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close)
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
         nav_view.setNavigationItemSelectedListener(this)
         loadData()
         handleIntent(intent)
-        replaceFragment(ArtworksFragment.newInstance(), R.id.root_layout,"ArtworksFragment")
+        if(!fromNotification) {
+            replaceFragment(ArtworksFragment.newInstance(), R.id.root_layout, "ArtworksFragment")
+        }
+
     }
+
+    private fun initViewModels()
+    {
+        artworkViewModel = ViewModelProviders.of(this).get(ArtworksViewModel::class.java)
+        artistViewModel = ViewModelProviders.of(this).get(ArtistsViewModel::class.java)
+        notificationsViewModel = ViewModelProviders.of(this).get(NotificationsViewModel::class.java)
+        notificationsViewModel.createNotificationChannel(this)
+
+    }
+
 
     private fun handleIntent(intent : Intent?)
     {
         if (intent != null) {
-            if (Intent.ACTION_SEARCH == intent.action)
-            {
+            if (Intent.ACTION_SEARCH == intent.action) {
                 val query = intent.getStringExtra(SearchManager.QUERY)
                 sendQueryToViewModel(query)
+            }
+            else if(intent.hasExtra("todayArtworkId"))
+            {
+                fromNotification = true
+                try{
+                        val artworkId = intent.getStringExtra("todayArtworkId")
+                        artworkViewModel.getArtwork({
+                            if(it!=null) {
+                                artworkViewModel.selectedArtwork = it
+                                replaceFragment(SingleArtworkFragment.newInstance(),
+                                        R.id.root_layout, "singleArtworkFragment")
+                            }
+                        },artworkId)
+                }
+                catch (e: Exception)
+                {
+                    Log.d("handleIntent error", e.message)
+                }
             }
         }
     }
@@ -78,7 +114,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         artistViewModel.loadArtists()
     }
 
-    private fun getVisibleFragment(): Fragment? {
+    private fun getVisibleFragment(): Fragment?
+    {
         val fragments = supportFragmentManager.fragments
             for (fragment in fragments)
             {
@@ -89,7 +126,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return null
     }
 
-    private inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> Unit) {
+    private inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> Unit)
+    {
         val fragmentTransaction = beginTransaction()
         fragmentTransaction.func()
         fragmentTransaction.commit()
@@ -101,7 +139,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
      */
 
-    private fun AppCompatActivity.replaceFragment(fragment: Fragment, frameId: Int, tag: String) {
+    private fun AppCompatActivity.replaceFragment(fragment: Fragment, frameId: Int, tag: String)
+    {
         supportFragmentManager.inTransaction{replace(frameId, fragment, tag) }
     }
     /*
@@ -159,7 +198,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 artistViewModel.resetSearchRes()
                 replaceFragment(ArtistsFragment.newInstance(), R.id.root_layout,"ArtistsFragment")
             }
-            R.id.nev_artworks ->
+            R.id.nav_artworks ->
             {
                 artworkViewModel.resetSearchRes()
                 replaceFragment(ArtworksFragment.newInstance(), R.id.root_layout,"ArtworksFragment")
@@ -173,9 +212,18 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 val intent = Intent(this, AuthActivity::class.java)
                 startActivity(intent)
             }
+            R.id.nav_notif_time ->
+            {
+                startTimePicker()
+            }
         }
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    private fun startTimePicker()
+    {
+        TimePickerFragment().show(supportFragmentManager, "timePicker")
     }
 
 }

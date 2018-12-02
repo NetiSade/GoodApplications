@@ -74,4 +74,5 @@
     <string name="fav_btn_msg_removed_from_fav">Removed from favorites</string>
     <string name="fav_btn_msg_added_to_fav">Added to favorites!</string>
     <string name="daily_artwork_notifications_ID">Daily artwork</string>
+    <string name="notif_time">Notification time</string>
 </resources>

@@ -15,6 +15,20 @@ class ArtworksModel : GoodApplicationModel() {
         }
     }
 
+    fun isThereArtworkForToday(onAnswerReadyCallback: OnAnswerReadyCallback){
+        firebaseDAL.isThereArtworkForToday()
+        {artwork->
+            onAnswerReadyCallback.onAnswerReady(artwork)
+        }
+    }
+
+    fun getArtwork(onAnswerReadyCallback: OnAnswerReadyCallback ,artworkId: String)
+    {
+        firebaseDAL.getArtwork({artwork ->
+            onAnswerReadyCallback.onAnswerReady(artwork)
+        },artworkId)
+    }
+
     fun loadFavArtworks (onFavListReady: OnFavListReadyCallback){
         firebaseDAL.listenToFavoritesArtworks()
         {it ->
@@ -30,6 +44,8 @@ class ArtworksModel : GoodApplicationModel() {
     {
         firebaseDAL.removeArtworkFromFavList(artworkId)
     }
+
+
 }
 
 interface OnArtworksReadyCallback{
@@ -38,4 +54,8 @@ interface OnArtworksReadyCallback{
 
 interface OnFavListReadyCallback{
     fun onFavIdListReady(data: ObservableArrayList<String>)
+}
+
+interface OnAnswerReadyCallback : (Artwork?) -> Unit {
+    fun onAnswerReady(artwork: Artwork?)
 }

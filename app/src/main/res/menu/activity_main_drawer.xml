@@ -6,7 +6,7 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nev_artworks"
+            android:id="@+id/nav_artworks"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/artworks_main_drawer" />
         <item
@@ -16,6 +16,9 @@
         <item
             android:id="@+id/nav_fav_artworks"
             android:title="@string/fav_artworks" />
+        <item
+            android:id="@+id/nav_notif_time"
+            android:title="@string/notif_time"/>
         <item
             android:id="@+id/nav_auth"
             android:title="@string/auth" />

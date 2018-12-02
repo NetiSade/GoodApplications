@@ -9,6 +9,7 @@ import android.util.Log
 import com.android.goodapplications.shira.model.*
 import android.text.Spannable
 import android.text.SpannableStringBuilder
+import com.facebook.internal.Mutable
 import com.google.firebase.auth.FirebaseUser
 import java.util.*
 import kotlin.math.max
@@ -266,4 +267,43 @@ class ArtworksViewModel : ViewModel() {
     fun getCurrentUser(): FirebaseUser? {
         return model.getCurrentUser()
     }
+
+    /*
+    fun loadFavArtworksId(){
+        model.loadFavArtworks(object : OnFavListReadyCallback{
+            override fun onFavIdListReady(data: ObservableArrayList<String>) {
+                favArtworksIdList.value = data
+                markAndSaveFavArtworks()
+                isLoading.set(false)
+            }
+        })
+    }
+     */
+
+    fun IsThereArtworkForToday(handler: (Artwork?) -> Unit)
+    {
+        model.isThereArtworkForToday(object : OnAnswerReadyCallback{
+            override fun invoke(p1: Artwork?) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
+            override fun onAnswerReady(artwork: Artwork?) {
+                handler(artwork)
+            }
+        })
+    }
+
+    fun getArtwork (handler: (Artwork?) -> Unit, artworkId: String) {
+        model.getArtwork(object: OnAnswerReadyCallback{
+            override fun invoke(p1: Artwork?) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
+            override fun onAnswerReady(artwork: Artwork?) {
+                handler(artwork)
+            }
+        },artworkId)
+
+    }
+
 }

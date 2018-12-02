@@ -1,47 +1,51 @@
 package com.android.goodapplications.shira.model
 
 import android.text.SpannableStringBuilder
-import android.util.Log
 import java.util.Date
 
 /**
  * Created by nsade on 15-Nov-17.
  */
-data class Artwork(val acum: Boolean = false,
-              var artistName:  String = "",
-              val bodyText: String = "",
-              val createdAt: Date = Date(),
-              val createdBy: String = "",
-              val dedication: String = "",
-              val description: String = "",
-              val image: String = "",
-              val isPublic: Boolean = false,
-              val link: String = "",
-              val note: String = "",
-              val publishedDate: Date = Date(),
-              val secondaryImage: String = "",
-              val source: String = "",
-              val sourceLang: String = "",
-              val sourceLangBodyText: String = "",
-              val strippedBodyText: String = "",
-              val strippedTitle: String = "",
-              var title: String = "",
-              val type: String = "",
-              val updatedAt: Date = Date(),
-              val verifiedByEditor: Boolean = false,
-              val year: String = "",
-              var SpannableStringTitle : SpannableStringBuilder = SpannableStringBuilder (""),
-              var SpannableStringArtistName : SpannableStringBuilder = SpannableStringBuilder (""),
-              var searchRes: SpannableStringBuilder = SpannableStringBuilder (""),
-              var showSearchRes: Boolean = false,
-              var favorite : Boolean = false,
-              var artworkId: String = ""
+data class Artwork(
+        var acum: Boolean = false,
+        var artistName:  String = "",
+        var bodyText: String = "",
+        var createdAt: Date? = null,
+        var createdBy: String = "",
+        var dedication: String = "",
+        var description: String = "",
+        var image: String = "",
+        var isPublic: Boolean = false,
+        var link: String = "",
+        var note: String = "",
+        var publisheDate: Date? = null,
+        var secondaryImage: String = "",
+        var source: String = "",
+        var sourceLang: String = "",
+        var sourceLangBodyText: String = "",
+        var strippedBodyText: String = "",
+        var strippedTitle: String = "",
+        var title: String = "",
+        var type: String = "",
+        var updatedAt: Date? = null,
+        var verifiedByEditor: Boolean = false,
+        var year: String = "",
+        var SpannableStringTitle: SpannableStringBuilder = SpannableStringBuilder (""),
+        var SpannableStringArtistName: SpannableStringBuilder = SpannableStringBuilder (""),
+        var searchRes: SpannableStringBuilder = SpannableStringBuilder (""),
+        var showSearchRes: Boolean = false,
+        var favorite: Boolean = false,
+        var artworkId: String = ""
               //val artistRef: DocumentReference
 
 ) {
-    init
-    {
-        Log.d("Artwork","New Artwork created!")
+    constructor(
+            title:String,
+            artistName: String,
+            bodyText: String) : this(){
+        this.title = title
+        this.artistName = artistName
+        this.bodyText = bodyText
     }
 
 }
